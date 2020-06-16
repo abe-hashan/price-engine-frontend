@@ -1,24 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
+import {Router, Switch, Route, Link} from 'react-router-dom'
+import {createBrowserHistory} from 'history'
 import './App.css';
+import ListComponent from './modules/List/ListComponent';
+import CartComponent from './modules/Cart/CartComponent';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Nav, NavItem, NavbarText, Navbar } from 'reactstrap';
+
+
+const history = createBrowserHistory();
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router history={history}>
+      <Navbar color="light" light expand="md">
+        
+        
+          <Nav className="mr-auto" navbar>
+            <NavItem>
+               <Link to="/">Price List</Link>
+            </NavItem>
+            <NavItem>
+              <Link to="/cart">Cart</Link>
+            </NavItem>
+            
+          </Nav>
+          <NavbarText>Price Engine</NavbarText>
+       
+      </Navbar>
+        <Switch>
+          <Route path="/" exact component={ListComponent}/>
+          <Route path="/cart" component={CartComponent}/>
+        </Switch>
+      </Router>
     </div>
   );
 }
